@@ -1,30 +1,20 @@
 import chalk from 'chalk';
-
-//Fredriks kod, lite omgjord
-
 import fs from 'fs/promises'
 import {formatDistanceToNow, isAfter, isBefore, parse, format, isToday, set} from 'date-fns'
 import {Command} from 'commander';
 import getGitVersion from './src/getGitVersion.js';
 
 
-//TERMINAL OUTPUT
+//EXTRA OUTPUT
 const gitVersion = await getGitVersion()
-console.log(`git version: ${gitVersion}`);
-
 const first = 'Ida'
 const last = 'Mäkelä'
+
+//FOR CONSOLE LOG
 const name = `${chalk.bgBlue(first)} ${chalk.bgBlue(last)}`
-console.log('name', name)
-
-console.log(`npm & node: ${process.env.npm_config_user_agent}`)
-
 
 
 //DATE CODE
-const startOfCourse = new Date(2023, 0, 31)
-console.log(formatDistanceToNow(startOfCourse))
-
 const argumentParser = new Command();
 argumentParser.option('--date')
 argumentParser.parse();
@@ -39,21 +29,28 @@ console.log('isBefore', isBefore(dateSentAsArgument, currentDate))
 
 //ASSIGNMENT
 //function: current date and time to file
-const today = format(new Date(), 'yyyy-MM-dd HH:mm:ss z');
-console.log(today)
+let today = format(new Date(), 'yyyy-MM-dd HH:mm:ss z');
 
 //function: how long since the course started
+const startOfCourse = new Date(2023, 0, 31)
+let daysFromCourseStart = formatDistanceToNow(startOfCourse)
+
 //date as argument (like input and check if its after or before course start)
 //good formatting for date and time (that "everyone" can understand)
 //function: creates plain runnable .html file in addition to .md file. Include 
 
 
 //INDEX.MD FILE OUTPUT
-const fileContent = `
+let fileContent = `
     date: ${today}
+
     name: ${first} ${last}
     npm & node: ${process.env.npm_config_user_agent}
     git version: ${gitVersion}
+    
+    days since course start: ${daysFromCourseStart}
 `;
 
 await fs.writeFile('index.md', fileContent);
+
+//CONSOLE LOG FILE CONTENT VAR
