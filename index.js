@@ -19,14 +19,7 @@ console.log('name', name)
 
 console.log(`npm & node: ${process.env.npm_config_user_agent}`)
 
-//INDEX.MD FILE OUTPUT
-const fileContent = `
-    name: ${first} ${last}
-    npm & node: ${process.env.npm_config_user_agent}
-    git version: ${gitVersion}
-`;
 
-await fs.writeFile('index.md', fileContent);
 
 //DATE CODE
 const startOfCourse = new Date(2023, 0, 31)
@@ -46,7 +39,21 @@ console.log('isBefore', isBefore(dateSentAsArgument, currentDate))
 
 //ASSIGNMENT
 //function: current date and time to file
+const today = format(new Date(), 'yyyy-MM-dd HH:mm:ss z');
+console.log(today)
+
 //function: how long since the course started
 //date as argument (like input and check if its after or before course start)
 //good formatting for date and time (that "everyone" can understand)
 //function: creates plain runnable .html file in addition to .md file. Include 
+
+
+//INDEX.MD FILE OUTPUT
+const fileContent = `
+    date: ${today}
+    name: ${first} ${last}
+    npm & node: ${process.env.npm_config_user_agent}
+    git version: ${gitVersion}
+`;
+
+await fs.writeFile('index.md', fileContent);
