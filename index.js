@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import fs from 'fs/promises'
-import {formatDistanceToNow, isAfter, isBefore, parse, format, isToday, set} from 'date-fns'
+import {formatDistanceToNow, isAfter, isBefore, parse, parseISO, format, isToday, set} from 'date-fns'
 import {Command} from 'commander';
 import getGitVersion from './src/getGitVersion.js';
 
@@ -35,7 +35,21 @@ let today = format(new Date(), 'yyyy-MM-dd HH:mm:ss z');
 const startOfCourse = new Date(2023, 0, 31)
 let daysFromCourseStart = formatDistanceToNow(startOfCourse)
 
-//date as argument (like input and check if its after or before course start)
+//date as argument (like which quarter todays date belongs to) 
+//ERROR: dosent accept string as argument, use parse 
+const argumentt = new Command();
+argumentt.option('--date')
+argumentt.parse();
+
+const dateargument = argumentt.args[0]
+const sentArgument = parse(dateargument, 'yyy-MM-dd', new Date())
+let todayy = format(new Date(), 'yyyy-MM-dd')
+
+console.log('isTodayy', isToday(sentArgument, todayy))
+console.log('isAfterr', isAfter(sentArgument, todayy))
+console.log('isBeforee', isBefore(sentArgument, todayy))
+
+
 //good formatting for date and time (that "everyone" can understand)
 //function: creates plain runnable .html file in addition to .md file. Include 
 
@@ -47,7 +61,7 @@ let fileContent = `
     name: ${first} ${last}
     npm & node: ${process.env.npm_config_user_agent}
     git version: ${gitVersion}
-    
+
     days since course start: ${daysFromCourseStart}
 `;
 
