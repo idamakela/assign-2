@@ -1,38 +1,34 @@
 import chalk from 'chalk';
 
-console.log(chalk.bgYellow('Ida'));
+//Fredriks kod, lite omgjord
 
-//Fredriks kod
-
-import chalk from 'chalk';
 import fs from 'fs/promises'
 import {formatDistanceToNow, isAfter, isBefore, parse, format, isToday, set} from 'date-fns'
 import {Command} from 'commander';
 import getGitVersion from './src/getGitVersion.js';
 
+
+//TERMINAL OUTPUT
 const gitVersion = await getGitVersion()
 console.log(`git version: ${gitVersion}`);
 
-const first = 'Fredrik'
-const last = 'Carlsson'
-const name = `${chalk.bgMagenta(first)} ${chalk.bgYellow(last)}`
-// const namn2 = 'Fredrik ' + 'Carlsson'
-// const namn2 = first + ' ' + last
-// const namn2 = `${first} ${last}`
+const first = 'Ida'
+const last = 'Mäkelä'
+const name = `${chalk.bgBlue(first)} ${chalk.bgBlue(last)}`
 console.log('name', name)
 
-// process.env.npm_config_user_agent only works when using `npm run start` not `node index.js`
 console.log(`npm & node: ${process.env.npm_config_user_agent}`)
 
-
+//INDEX.MD FILE OUTPUT
 const fileContent = `
-name: ${first} ${last}
-npm & node: ${process.env.npm_config_user_agent}
-git version: ${gitVersion}
+    name: ${first} ${last}
+    npm & node: ${process.env.npm_config_user_agent}
+    git version: ${gitVersion}
 `;
 
 await fs.writeFile('index.md', fileContent);
 
+//DATE CODE
 const startOfCourse = new Date(2023, 0, 31)
 console.log(formatDistanceToNow(startOfCourse))
 
@@ -47,3 +43,10 @@ const currentDate = set(new Date(), {hours: 0, minutes: 0, seconds: 0, milliseco
 console.log('isToday', isToday(dateSentAsArgument))
 console.log('isAfter', isAfter(dateSentAsArgument, currentDate))
 console.log('isBefore', isBefore(dateSentAsArgument, currentDate))
+
+//ASSIGNMENT
+//function: current date and time to file
+//function: how long since the course started
+//date as argument (like input and check if its after or before course start)
+//good formatting for date and time (that "everyone" can understand)
+//function: creates plain runnable .html file in addition to .md file. Include 
