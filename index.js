@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import fs from 'fs/promises'
-import {formatDistanceToNow, isAfter, isBefore, parse, parseISO, format, isToday, set} from 'date-fns'
+import {formatDistanceToNow, parse, format, isLeapYear, isValid} from 'date-fns'
 import {Command} from 'commander';
 import getGitVersion from './src/getGitVersion.js';
 
@@ -13,20 +13,6 @@ const last = 'Mäkelä'
 //FOR CONSOLE LOG
 const name = `${chalk.bgBlue(first)} ${chalk.bgBlue(last)}`
 
-
-//DATE CODE
-const argumentParser = new Command();
-argumentParser.option('--date')
-argumentParser.parse();
-
-const dateStringSentAsArgument = argumentParser.args[0]
-const dateSentAsArgument = parse(dateStringSentAsArgument, 'yyyy-MM-dd', new Date())
-const currentDate = set(new Date(), {hours: 0, minutes: 0, seconds: 0, milliseconds: 0})
-
-console.log('isToday', isToday(dateSentAsArgument))
-console.log('isAfter', isAfter(dateSentAsArgument, currentDate))
-console.log('isBefore', isBefore(dateSentAsArgument, currentDate))
-
 //ASSIGNMENT
 //function: current date and time to file
 let today = format(new Date(), 'yyyy-MM-dd HH:mm:ss z');
@@ -36,18 +22,34 @@ const startOfCourse = new Date(2023, 0, 31)
 let daysFromCourseStart = formatDistanceToNow(startOfCourse)
 
 //date as argument (like which quarter todays date belongs to) 
-//ERROR: dosent accept string as argument, use parse 
-const argumentt = new Command();
-argumentt.option('--date')
-argumentt.parse();
+const argumentInput = new Command();
+argumentInput.option('--date');
+argumentInput.parse();
 
-const dateargument = argumentt.args[0]
-const sentArgument = parse(dateargument, 'yyy-MM-dd', new Date())
-let todayy = format(new Date(), 'yyyy-MM-dd')
+const dateStringSentAsArgument = argumentInput.args[0];
+const dateSentAsArgument = parse(dateStringSentAsArgument, 'yyyy-MM-dd', new Date());
+//assignment is: function: figure out if date sent as a argument is before or after the date when you run the file 
 
-console.log('isTodayy', isToday(sentArgument, todayy))
-console.log('isAfterr', isAfter(sentArgument, todayy))
-console.log('isBeforee', isBefore(sentArgument, todayy))
+
+//date argument test function
+
+
+let leapYearVar = isLeapYear(dateSentAsArgument);
+let dateValidator = isValid(dateSentAsArgument);
+
+if(dateValidator == false) {
+    console.log('Try and write "npm run start --date" followed by a date with the format "yyyy-MM-dd" in double parenthesis');
+} else {
+    leapYearTest(dateSentAsArgument);
+}
+
+function leapYearTest() {
+    if(leapYearVar == true) {
+        console.log('This date occurs under a leap year')
+    } else {
+        console.log('This date does not occur under a leap year')
+    }
+}
 
 
 //good formatting for date and time (that "everyone" can understand)
