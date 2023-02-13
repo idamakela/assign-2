@@ -4,46 +4,59 @@ import {formatDistanceToNow, parse, format, set, isLeapYear, isValid, isAfter, i
 import {Command} from 'commander';
 import getGitVersion from './src/getGitVersion.js';
 
+let gitVersion = await getGitVersion();
+let first = 'Ida';
+let last = 'Mäkelä';
 
-//EXTRA OUTPUT
-let gitVersion = await getGitVersion()
-let first = 'Ida'
-let last = 'Mäkelä'
+let name = `${chalk.bgBlue(first)} ${chalk.bgBlue(last)}`;
+console.log(name);
 
-//FOR CONSOLE LOG
-let name = `${chalk.bgBlue(first)} ${chalk.bgBlue(last)}`
-
-//ASSIGNMENT
-//function: current date and time to file
 let today = format(new Date(), 'yyyy-MM-dd HH:mm:ss z');
 
-//function: how long since the course started
 let startOfCourse = new Date(2023, 0, 31)
 let daysFromCourseStart = formatDistanceToNow(startOfCourse)
 
-//date as argument (like which quarter todays date belongs to) 
 let argumentParser = new Command();
 argumentParser.option('--date');
 argumentParser.parse();
 
 let dateStringSentAsArgument = argumentParser.args[0];
 let dateSentAsArgument = parse(dateStringSentAsArgument, 'yyyy-MM-dd', new Date());
-let currentDate = set(new Date(), {hours: 0, minutes: 0, seconds: 0, milliseconds: 0})
-let leapYearVar = isLeapYear(dateSentAsArgument);
+let currentDate = set(new Date(), {hours: 0, minutes: 0, seconds: 0, milliseconds: 0});
+
+let leapYearTest = isLeapYear(dateSentAsArgument);
+let isBeforeTest = isBefore(dateSentAsArgument, currentDate);
+let isTodayTest = isToday(dateSentAsArgument);
+let isAfterTest = isAfter(dateSentAsArgument, currentDate);
+
 let dateValidator = isValid(dateSentAsArgument);
 
-if(dateValidator == false) {
-    console.log('Try and write "npm run start --date" followed by a date with the format "yyyy-MM-dd" in double parenthesis');
+if(!dateValidator) {
+    console.log('Try and write "npm run start --date" followed by a date with the format "yyyy-MM-dd" in parenthesis');
 } else {
-    console.log('isBefore', isBefore(dateSentAsArgument, currentDate))
-    console.log('isToday', isToday(dateSentAsArgument))
-    console.log('isAfter', isAfter(dateSentAsArgument, currentDate))
-
-    leapYearTest(dateSentAsArgument);
+    checkDate(dateSentAsArgument);
+    isDateLeapYear(dateSentAsArgument);
 }
 
-function leapYearTest() {
-    if(leapYearVar == true) {
+function checkDate() {
+    if(isBeforeTest) {
+        console.log('The date is before todays date');
+        return;
+    } 
+
+    if(isTodayTest){
+        console.log('The date is todays date');
+        return;
+    }
+
+    if(isAfterTest){
+        console.log('The date is after todays date');
+        return;
+    }
+}
+
+function isDateLeapYear() {
+    if(leapYearTest) {
         console.log('This date occurs under a leap year')
     } else {
         console.log('This date does not occur under a leap year')
