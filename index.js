@@ -1,6 +1,6 @@
 import chalk from 'chalk';
-import fs from 'fs/promises'
-import {formatDistanceToNow, parse, format, set, isLeapYear, isValid, isAfter, isBefore, isToday} from 'date-fns'
+import fs from 'fs/promises';
+import {formatDistanceToNow, parse, format, set, isLeapYear, isValid, isAfter, isBefore, isToday} from 'date-fns';
 import {Command} from 'commander';
 import getGitVersion from './src/getGitVersion.js';
 
@@ -13,8 +13,8 @@ console.log(name);
 
 let today = format(new Date(), 'yyyy-MM-dd HH:mm:ss z');
 
-let startOfCourse = new Date(2023, 0, 31)
-let daysFromCourseStart = formatDistanceToNow(startOfCourse)
+let startOfCourse = new Date(2023, 0, 31);
+let daysFromCourseStart = formatDistanceToNow(startOfCourse);
 
 let argumentParser = new Command();
 argumentParser.option('--date');
@@ -57,9 +57,9 @@ function checkDate() {
 
 function isDateLeapYear() {
     if(leapYearTest) {
-        console.log('This date occurs under a leap year')
+        console.log('This date occurs under a leap year');
     } else {
-        console.log('This date does not occur under a leap year')
+        console.log('This date does not occur under a leap year');
     }
 }
 
