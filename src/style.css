@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+}
+
+header,
+footer {
+    background-color: #3587A4;
+    color: #FFFFFF;
+}
+
+header {
+    padding: 10%;
+    text-align: center;
+}
+
+footer {
+    padding: 8%;
+}
+
+.container {
+    padding: 5%;
+    margin: 5%;
+    border-radius: 1em;
+    background-color: #C1DFF0;
+}
+
+p {
+    margin-bottom: 0.5em;
+}

@@ -50,21 +50,58 @@ function leapYearTest() {
     }
 }
 
-//good formatting for date and time (that "everyone" can understand)
-//function: creates plain runnable .html file in addition to .md file. Include 
-
-
-//INDEX.MD FILE OUTPUT
 let fileContent = `
-    date: ${today}
+date: ${today}
 
-    name: ${first} ${last}
-    npm & node: ${process.env.npm_config_user_agent}
-    git version: ${gitVersion}
+name: ${first} ${last}
+npm & node: ${process.env.npm_config_user_agent}
+git version: ${gitVersion}
 
-    days since course start: ${daysFromCourseStart}
+days since course start: ${daysFromCourseStart}
+`;
+
+let htmlContent = `
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>JavScript Framework course | Assignment week two</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="src/style.css">
+    <body>
+        <header>
+            <h1>OUTPUT HTML FILE</h1>
+        </header>
+        <main>
+            <div class='container'>
+                <p>File run last on:</p>
+                <p>${today}</p>
+            </div>
+
+            <div class='container'>
+                <p>The JS Framework course started ${daysFromCourseStart} ago</p>
+            </div>
+
+            <div class='container'>
+                <p>Name of author:</p>
+                <p>${first} ${last}</p>
+            </div>
+
+            <div class='container'>
+                <p>Local version specifications:</p>
+                <p>npm & node: ${process.env.npm_config_user_agent}</p>
+                <p>git version: ${gitVersion}</p>
+            </div>
+
+            <div class='container'>
+                <p>Take a look in the terminal and run the index.js file!</p>
+            </div>
+        </main>
+        <footer>
+            <h2>&copy; Ida Mäkelä</h2>
+        </footer>
+    </body>
 `;
 
 await fs.writeFile('index.md', fileContent);
-
-//CONSOLE LOG FILE CONTENT VAR
+await fs.writeFile('index.html', htmlContent);
