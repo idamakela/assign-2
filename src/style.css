@@ -1,14 +1,14 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    height: 100vh;
-    font-family: monospace;
     display: flex;
     flex-direction: column;
+    font-family: monospace;
+    height: 100vh;
 }
 
 main {
@@ -31,10 +31,10 @@ footer {
 }
 
 .container {
-    padding: 5%;
-    margin: 5%;
-    border-radius: 1em;
     background-color: #C1DFF0;
+    border-radius: 1em;
+    margin: 5%;
+    padding: 5%;
 }
 
 p {
