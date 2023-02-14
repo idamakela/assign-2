@@ -4,6 +4,10 @@ import {formatDistanceToNow, parse, format, set, isLeapYear, isValid, isAfter, i
 import {Command} from 'commander';
 import getGitVersion from './src/getGitVersion.js';
 
+//SUGGESTIONS FOR BETTER CODE
+//functions for creating the container divs and its content in htmlContent
+//placeholders in funciton, ie checkDate
+
 let gitVersion = await getGitVersion();
 let first = 'Ida';
 let last = 'Mäkelä';
@@ -81,6 +85,8 @@ let htmlContent = `
         <title>JavScript Framework course | Assignment week two</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="src/style.css">
+        <meta charset="UTF-8">
+    </head>
     <body>
         <header>
             <h1>OUTPUT HTML FILE</h1>
@@ -114,6 +120,7 @@ let htmlContent = `
             <h2>&copy; Ida Mäkelä</h2>
         </footer>
     </body>
+</html>
 `;
 
 await fs.writeFile('index.md', fileContent);
